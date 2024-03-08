@@ -36,20 +36,23 @@ class Record:
 
 
 	def remove_phone(self, phone):
-		phone_to_remove = self.phones.get(phone)
-		if phone_to_remove:
-			self.phones.remove(phone_to_remove)
-		else:
-			print(f"No such phone: {phone} in record.")
+		for p in self.phones:
+			if p.value == phone:
+				self.phones.remove(p)
+				break
 
 
 	def edit_phone(self, phone, new_phone):
-		phone_to_edit = list(filter(lambda p: p.value == phone, self.phones))[0]
-		phone_to_edit.value = Phone(new_phone)
+		for p in self.phones:
+			if p.value == phone:
+				p.value = new_phone
+				break
 
 
 	def find_phone(self, phone):
-		return list(filter(lambda p: p.value == phone, self.phones))[0]
+		for p in self.phones:
+			if p.value == phone:
+				return p
 
 
 class AddressBook(UserDict):
